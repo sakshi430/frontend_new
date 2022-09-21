@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import UsersJson from './data.json';
-  
+import { ReadCsvService } from './read-csv.service';
+
 interface USERS {
-    id: String;
-    payeename: String;
-    payername: String;
-    payeeacc: String;
-    payeracc: String;
-    date: String;
-    amt: String;
+  id: String;
+  payeename: String;
+  payername: String;
+  payeeacc: String;
+  payeracc: String;
+  date: String;
+  amt: String;
 }
 
 
@@ -18,45 +19,58 @@ interface USERS {
 
 
 export class FillTablesService {
-  Users: USERS[] = UsersJson;
-  constructor(){
-  // console.log(this.Users);
+  constructor(private readcsv:ReadCsvService) {
+    // console.log(this.Users);
   }
-
-  public showUsers(){
-    
- // let columnFromBackend = getData();
- // console.log(columnFromBackend);  // line 34
-  }
-
-  public getvalidpass(){
-    const getData = async () => {
-      let response = await fetch("http://localhost:3000/validpass");
-    
-      let data = await response.json();
-      
-      this.Users = data;
-      console.log(this.Users);  // line 29
-    
-    };
   
-    getData();
+ // Users: USERS[] = [];
+
+  public showUsers() {
+
+    // let columnFromBackend = getData();
+    // console.log(columnFromBackend);  // line 34
   }
 
-  public getvalidfail(){
-    const getData = async () => {
-      let response = await fetch("http://localhost:3000/validfail");
+  public async getall(){
+    let response = await fetch("http://localhost:3000/api/all");
+    //console.log(typeof response.json());
     
-      let data = await response.json();
-      
-      this.Users = data;
-      console.log(this.Users);  // line 29
-      
-    };
-  
-    getData();
+
+  return response.json();
+
+
   }
 
-  
+  public async getvalidpass() {
+    let response = await fetch("http://localhost:3000/api/validate-pass/");
+
+    return response.json();
+
+
+  }
+
+  public async getvalidfail() {
+    let response = await fetch("http://localhost:3000/api/validate-fail/");
+
+    return response.json();
+
+
+  }
+
+  public async getscreenpass() {
+    let response = await fetch("http://localhost:3000/api/screen-pass/");
+
+    return response.json();
+
+
+  }
+
+  public async getscreenfail() {
+    let response = await fetch("http://localhost:3000/api/screen-fail/");
+
+    return response.json();
+
+
+  }
 
 }
