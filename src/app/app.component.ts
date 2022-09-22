@@ -10,14 +10,14 @@ import { FillTablesService } from './services/fill-tables.service';
 export class AppComponent {
   title = 'frontend_new';
   changeLog: any;
-
+  image_src:string = "assets/images/citi-logo.png";
   users:any;
 
   constructor(private fillTable: FillTablesService, private csvFile: ReadCsvService, private changeDetection: ChangeDetectorRef) {
   
     //this.users= this.fillTable.getall();
    // this.fetchInitialData();
-    //this.users=this.csvFile.data;
+    this.users=this.csvFile.data;
    }
 
     async fetchInitialData(){
