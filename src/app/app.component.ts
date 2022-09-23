@@ -31,7 +31,7 @@ export class AppComponent {
 
   async changeListener(file: any) {
     // console.log("hi");
-     this.csvFile.ReadCsv(file);
+     await this.csvFile.ReadCsv(file);
      await this.fetchInitialData();
    // this.fillTable.getall();
     // this.fillTable.showUsers();
