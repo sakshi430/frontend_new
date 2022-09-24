@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { ReadCsvService } from './services/read-csv.service';
 import { FillTablesService } from './services/fill-tables.service';
+import { Title }     from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,17 @@ export class AppComponent {
   image_src:string = "assets/images/citi-logo.png";
   users:any;
 
-  constructor(private fillTable: FillTablesService, private csvFile: ReadCsvService, private changeDetection: ChangeDetectorRef) {
+  constructor(private titleService: Title ,private fillTable: FillTablesService, private csvFile: ReadCsvService, private changeDetection: ChangeDetectorRef) {
   
     //this.users= this.fillTable.getall();
    // this.fetchInitialData();
     this.users=this.csvFile.data;
+    this.setTitle();
    }
+
+   public setTitle( ) {
+    this.titleService.setTitle( "Sanction Screening" );
+  }
 
     async fetchInitialData(){
     const data= await this.fillTable.getall();
